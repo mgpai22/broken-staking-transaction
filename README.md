@@ -1,5 +1,15 @@
 # Broken Staking Transaction
 
+## Update 3
+
+Although Apollo [sorts the inputs when setting the redeemers](https://github.com/zenGate-Global/apollo/blob/80711ee2a0e8d5697544347cc3a93d2badf4638b/ApolloBuilder.go#L837), it does not ever seem to sort the `preselectedUtxos`.
+
+Therefore, its not sorted when building the transaction body.
+
+Sorting it before building the body could be the solution.
+
+Its done in [this commit](https://github.com/zenGate-Global/apollo/commit/80711ee2a0e8d5697544347cc3a93d2badf4638b).
+
 ## Update 2
 
 Pi from Sundae confirmed that input sorting is the issue:
