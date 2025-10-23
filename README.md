@@ -4,72 +4,72 @@
 
 Pi from Sundae confirmed that input sorting is the issue:
 
-ok so my guess was right 😅  That can get your evaluation to work, but the network won't accept it.
-
-So, when you submit a transaction, the node constructs the script context (also called "TxInfo") to pass into your smart contract.
-
-For some *UNHOLY UNGODLY FRUSTRATING HELLFIRE DAMNED* reason, it sorts the transaction inputs lexographically.
-
-So, while you have these inputs in your transaction:
-```
-0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
-f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1
-1a497316e1bf39f53cdf6b2b4f7a3ea423ecddfe93db975046b4d37edb8b1aa5#2
-```
-
-But, when it gets passed to your smart contract, it looks like
-```
-0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
-1a497316e1bf39f53cdf6b2b4f7a3ea423ecddfe93db975046b4d37edb8b1aa5#2
-f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1
-```
-
-now, the weird thing is that the redeemers in your transaction uses *this* order, rather than the order they are in the bytes of your transaction.
-
-So, in your case, you have 
-```
-            [0, 0, 121_0([]), [0, 0]],
-            [0, 1, 121_0([_ ...]), [0, 0]],
-            [1, 0, 122_0([]), [0, 0]],
-```
-
-This means
-```
-The script on the 0th input in ledger order has redeemer 121_0([]), and a budget of [0,0]
-
-The script on the 1st input in ledger order has redeemer 121_0[(_ ...]), and a budget of [0,0]
-
-The script for the first token minted in ledger order has redeemer 122_0([]) and a budget of [0,0]
-```
-
-In particular, that means your spend redeemers are pointing at these two inputs:
-```
-0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
-1a497316e1bf39f53cdf6b2b4f7a3ea423ecddfe93db975046b4d37edb8b1aa5#2
-```
-
-and not these two
-```
-0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
-f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1
-```
-
-So when you run the code here:
-```
- expect Some(stake_redeemer) =
-    pairs.get_first(tx.redeemers, Spend(stake_input.output_reference))
-```
-
-It says "find me the first redeemer that is for `f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1`... and according to the ledger, there *is* no such redeemer.
-
-if you instead change your redeemers to
-```
-            [0, 0, 121_0([]), [0, 0]],
-            [0, 2, 121_0([_ ...]), [0, 0]], <--- N.B.!!!
-            [1, 0, 122_0([]), [0, 0]],
-```
-
-I believe it should work.
+> ok so my guess was right 😅  That can get your evaluation to work, but the network won't accept it.
+>
+> So, when you submit a transaction, the node constructs the script context (also called "TxInfo") to pass into your smart contract.
+>
+> For some *UNHOLY UNGODLY FRUSTRATING HELLFIRE DAMNED* reason, it sorts the transaction inputs lexographically.
+>
+> So, while you have these inputs in your transaction:
+> ```
+> 0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
+> f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1
+> 1a497316e1bf39f53cdf6b2b4f7a3ea423ecddfe93db975046b4d37edb8b1aa5#2
+> ```
+>
+> But, when it gets passed to your smart contract, it looks like
+> ```
+> 0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
+> 1a497316e1bf39f53cdf6b2b4f7a3ea423ecddfe93db975046b4d37edb8b1aa5#2
+> f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1
+> ```
+>
+> now, the weird thing is that the redeemers in your transaction uses *this* order, rather than the order they are in the bytes of your transaction.
+>
+> So, in your case, you have 
+> ```
+>             [0, 0, 121_0([]), [0, 0]],
+>             [0, 1, 121_0([_ ...]), [0, 0]],
+>             [1, 0, 122_0([]), [0, 0]],
+> ```
+>
+> This means
+> ```
+> The script on the 0th input in ledger order has redeemer 121_0([]), and a budget of [0,0]
+>
+> The script on the 1st input in ledger order has redeemer 121_0[(_ ...]), and a budget of [0,0]
+>
+> The script for the first token minted in ledger order has redeemer 122_0([]) and a budget of [0,0]
+> ```
+>
+> In particular, that means your spend redeemers are pointing at these two inputs:
+> ```
+> 0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
+> 1a497316e1bf39f53cdf6b2b4f7a3ea423ecddfe93db975046b4d37edb8b1aa5#2
+> ```
+>
+> and not these two
+> ```
+> 0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5#0
+> f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1
+> ```
+>
+> So when you run the code here:
+> ```
+>  expect Some(stake_redeemer) =
+>     pairs.get_first(tx.redeemers, Spend(stake_input.output_reference))
+> ```
+>
+> It says "find me the first redeemer that is for `f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9#1`... and according to the ledger, there *is* no such redeemer.
+>
+> if you instead change your redeemers to
+> ```
+>             [0, 0, 121_0([]), [0, 0]],
+>             [0, 2, 121_0([_ ...]), [0, 0]], <--- N.B.!!!
+>             [1, 0, 122_0([]), [0, 0]],
+> ```
+>
+> I believe it should work.
 
 ## Update 1
 
