@@ -1,0 +1,262 @@
+{
+  "body": {
+    "inputs": [
+      {
+        "transaction_id": "0c687f064f4409d7ee16852f9b02b0c9feddd226907fc1d55c006836f3d8d3c5",
+        "index": 0
+      },
+      {
+        "transaction_id": "f17d3477595091dc56dbc16dc710f1edb10a02914b7184b8c0a161bb416bc9d9",
+        "index": 1
+      }
+    ],
+    "outputs": [
+      {
+        "ConwayFormatTxOut": {
+          "address": "addr1wxu6gpdsy6xv5c5r9s9t3ngyh0svvn8lqgfajwgxpry3slg86ahe3",
+          "amount": {
+            "coin": 5000000,
+            "multiasset": {
+              "3e8580b9d8818e060d6d15acb3cd9afbaf685a948009ea30d20fed7e": {
+                "70616c6d5f7374616b696e675f73696e676c65746f6e": 1
+              },
+              "b7c5cd554f3e83c8aa0900a0c9053284a5348244d23d0406c28eaf4d": {
+                "50414c4d0a": 957271585667462
+              }
+            }
+          },
+          "datum_option": {
+            "Datum": {
+              "datum": {
+                "constructor": 0,
+                "fields": [
+                  {
+                    "int": 922746189902227
+                  },
+                  {
+                    "int": 2.481568190087385e+21
+                  },
+                  {
+                    "int": 3065309400000
+                  },
+                  {
+                    "int": 604800000
+                  },
+                  {
+                    "int": 1760972782000
+                  },
+                  {
+                    "bytes": "da23533c8b793d01c644b7d29f45dc0ba77fc3c2602a7ffd16024e237baba3ed"
+                  },
+                  {
+                    "int": 1e+22
+                  },
+                  {
+                    "constructor": 1,
+                    "fields": []
+                  },
+                  {
+                    "constructor": 1,
+                    "fields": [
+                      {
+                        "bytes": "219ad85cb7cb300f3d315e5b8469de05ae79e8135c318d1d0d0de690"
+                      }
+                    ]
+                  },
+                  {
+                    "bytes": "d257f3eb0a3b2e9226e0eb0f4d57afb058da47741bfa340eab996b3f"
+                  },
+                  {
+                    "bytes": "70616c6d5f7265776172645f72656c656173655f73696e676c65746f6e"
+                  },
+                  {
+                    "bytes": "88633994f6f716f4a4a8e1f4ab91a6888b1b4c414ac4b6e9910efc67"
+                  },
+                  {
+                    "bytes": "70616c6d5f6d756c74697369675f73696e676c65746f6e"
+                  }
+                ]
+              }
+            }
+          },
+          "script_reference": null
+        }
+      }
+    ],
+    "fee": 2200000,
+    "ttl": 169622547,
+    "certs": null,
+    "withdrawals": null,
+    "auxiliary_data_hash": null,
+    "validity_interval_start": 169622457,
+    "mint": {
+      "219ad85cb7cb300f3d315e5b8469de05ae79e8135c318d1d0d0de690": {
+        "70616c6d5f7374616b696e675f70726f78795f67756172645f746f6b656e": -1
+      }
+    },
+    "script_data_hash": "56327f04540784909d8b6a3cddb32374aed0e4a0445b9cdb49cdbc0efe8a0708",
+    "collateral_inputs": [
+      {
+        "transaction_id": "6e26a5af07d5eec82a50f901eb06d7997c6f336a6efc7333d6dd20fb153bcd3a",
+        "index": 0
+      }
+    ],
+    "required_signers": null,
+    "network_id": null,
+    "collateral_return": {
+      "AlonzoFormatTxOut": {
+        "address": "addr1qy925dn82e6au5hdxnjg9ymld5ucq27gepcv22sym9u3xkl0wn5u02d74fhw0759ajkpg5ghe4y62dys92mgf58qnnqqufr7kx",
+        "amount": {
+          "coin": 1700000,
+          "multiasset": {}
+        },
+        "datum_hash": null
+      }
+    },
+    "total_collateral": 3300000,
+    "reference_inputs": [
+      {
+        "transaction_id": "5fea91b99c5544f627c77a7b8cf29712161ae415754a5260e02b46632f16f481",
+        "index": 0
+      },
+      {
+        "transaction_id": "e7e82bd859d42dd59a87c21c7848b97ff381f883285087ab1e5e1f60c03ae21b",
+        "index": 0
+      }
+    ],
+    "voting_procedures": null,
+    "proposal_procedures": null,
+    "current_treasury_value": null,
+    "donation": null
+  },
+  "witness_set": {
+    "vkeywitnesses": [
+      {
+        "vkey": "ed25519_pk1vfh6z0vfrn2kmdarg9rk5g6ghgpvyh0s9s4xxwrr3e9rtqvhu6fsdgxv8a",
+        "ed25519_signature": "e86899512b062d70385c5f3f78e34bbb6df23a77b6a84184bd83dffc383027000c0f0cceeaea1392087f5fe072e15cc412bc78903b04bf86df64840bc5616d07"
+      }
+    ],
+    "native_scripts": null,
+    "bootstrap_witnesses": null,
+    "plutus_v1_scripts": null,
+    "plutus_datums": null,
+    "redeemers": {
+      "ArrLegacyRedeemer": {
+        "arr_legacy_redeemer": [
+          {
+            "tag": "Spend",
+            "index": 0,
+            "data": {
+              "constructor": 0,
+              "fields": []
+            },
+            "ex_units": {
+              "mem": 331732,
+              "steps": 110322424
+            }
+          },
+          {
+            "tag": "Spend",
+            "index": 1,
+            "data": {
+              "constructor": 0,
+              "fields": [
+                {
+                  "constructor": 0,
+                  "fields": []
+                },
+                {
+                  "map": []
+                },
+                {
+                  "map": [
+                    {
+                      "k": {
+                        "bytes": "971d1dcdf9e5e000b6bea063578bedb7710e448d3e71d3552dfa75e4"
+                      },
+                      "v": {
+                        "int": 204109775022
+                      }
+                    }
+                  ]
+                },
+                {
+                  "map": [
+                    {
+                      "k": {
+                        "bytes": "971d1dcdf9e5e000b6bea063578bedb7710e448d3e71d3552dfa75e4"
+                      },
+                      "v": {
+                        "list": [
+                          {
+                            "constructor": 0,
+                            "fields": [
+                              {
+                                "int": 0
+                              },
+                              {
+                                "bytes": "69d5d0d348b2cf45387989a6086329b8afd0815a9c54302f8543087ed51f673b916c06933f487f645c8f5cbecb9a94b8597be67a82e44203d5cef92795b4f963469a69fe10cef6788b7d3f3296e1920d6d74157c5616accb22137dfe8bca443515f60b5b8361a5013c11593d644fcf9fca644b7b9ad71ca3ec81a7397a6fd381"
+                              }
+                            ]
+                          },
+                          {
+                            "constructor": 0,
+                            "fields": [
+                              {
+                                "int": 0
+                              },
+                              {
+                                "bytes": "65932991d5ab936aa616f976d60bbca37804c21efff2acf1e1bc6e7f6a6862969abc83e9cc434211caa29f95cc96a551f48974d5b6ca49854e58c530cca4c90535eadbf2cf23f0d9f92049b66bd7f91edf171ffd5cc88e81ea73a933c4b75cf0b31ec0b369eb51024b0b32d5c3d47d0b3012387f7a26d09b36973981a5bd56c3"
+                              }
+                            ]
+                          },
+                          {
+                            "constructor": 2,
+                            "fields": [
+                              {
+                                "int": 0
+                              },
+                              {
+                                "bytes": "0068cf79e5e033b5aadcecc7a58a14ee7f9a1a2d91471286a39d8cf5efc5f7d8"
+                              },
+                              {
+                                "bytes": "0c324e92777e527c5b1a7a7dc487733ea99ba25ef0caf8cb934b89db06b379ab"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                },
+                {
+                  "map": []
+                }
+              ]
+            },
+            "ex_units": {
+              "mem": 1083656,
+              "steps": 340506477
+            }
+          },
+          {
+            "tag": "Mint",
+            "index": 0,
+            "data": {
+              "constructor": 1,
+              "fields": []
+            },
+            "ex_units": {
+              "mem": 90454,
+              "steps": 26638334
+            }
+          }
+        ]
+      }
+    },
+    "plutus_v2_scripts": null,
+    "plutus_v3_scripts": null
+  },
+  "is_valid": true,
+  "auxiliary_data": null
+}
