@@ -1,5 +1,12 @@
 # Broken Staking Transaction
 
+## [RESOLVED!!] Update 4
+
+The sorting of inputs in tx body is not required by the node, only during setting the redeemer indicies it really matters. However, I think it is nice to do so since it can be unambigous when comparing the redeemer array to the input refs in the decoded cbor hex json.
+
+The issue was that after adding change and fee, apollo never updated the redeemer indices. It is [fixed here](https://github.com/zenGate-Global/apollo/commit/124a95d4dc5592d56529dd7fa598f81aeea073ef).
+
+
 ## Update 3
 
 Although Apollo [sorts the inputs when setting the redeemers](https://github.com/zenGate-Global/apollo/blob/80711ee2a0e8d5697544347cc3a93d2badf4638b/ApolloBuilder.go#L837), it does not ever seem to sort the `preselectedUtxos`.
